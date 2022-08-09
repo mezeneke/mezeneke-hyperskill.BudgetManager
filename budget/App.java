@@ -32,9 +32,8 @@ public class App {
     void main() {
         do {
             System.out.println(Menu.mainMenu);
-            int button = userInput.scanButton();
 
-            switch (button) {
+            switch (userInput.scanButton()) {
                 case 1: addIncome(); break;
                 case 2: purchase(); break;
                 case 3: showPurchases(); break;
@@ -84,42 +83,38 @@ public class App {
         do {
             System.out.println(Menu.showPurchasesMenu);
 
-            int key = userInput.scanButton();
+            int button = userInput.scanButton();
 
-            if (categories.containsKey(key)) {
-                Categories category = categories.get(key);
-                System.out.printf("\n%s:\n", category.name);
-                listExpenses(purchases.getProducts(category));
-            } else if (key == numberOfCategories + 1) {
-                System.out.println("\nAll:");
-                listExpenses(purchases.getProducts());
+            if (categories.containsKey(button)) {
+                Categories category = categories.get(button);
+                analyzer.setMethod(new SortCertainType(category));
+                analyzer.analyze(purchases);
+            } else if (button == numberOfCategories + 1) {
+                analyzer.setMethod(new SortAll());
+                analyzer.analyze(purchases);
             }
         }  while (userInput.getButton() != numberOfCategories + 2);
     }
 
-    void listExpenses(List<Product> products) {
-        if (products.isEmpty()) {
-            System.out.println("The purchase list is empty!\n");
-        } else {
-            for (Product product : products) {
-                System.out.println(product);
-            }
-            System.out.printf("Total sum: %.2f\n\n", Expenses.getTotal(products));
-        }
-    }
-
     void selectAnalyzer() {
-        System.out.println(Menu.analyzerMenu);
-        int button = userInput.scanButton();
-
         do {
-            switch (button) {
+            System.out.println(Menu.analyzerMenu);
+
+            switch (userInput.scanButton()) {
                 case 1:
                     analyzer.setMethod(new SortAll());
                     analyzer.analyze(purchases);
                     break;
                 case 2:
+                    analyzer.setMethod(new SortByType());
+                    analyzer.analyze(purchases);
+                    break;
                 case 3:
+                    System.out.print(Menu.analyzerSortByTypeMenu);
+                    Categories category = categories.get(userInput.scanButton(false));
+                    analyzer.setMethod(new SortCertainType(category));
+                    analyzer.analyze(purchases);
+                    break;
                 default: break;
             }
         } while (userInput.getButton() != 4);

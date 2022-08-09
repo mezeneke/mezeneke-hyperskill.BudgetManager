@@ -21,7 +21,7 @@ public class Product implements Comparable<Product> {
 
     @Override
     public String toString() {
-        return String.format("%s %.2f", name, price);
+        return String.format("%s $%.2f", name, price);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class Product implements Comparable<Product> {
         if (this.price < other.price) {
             return -1;
         } else if (this.price == other.price) {
-            return 0;
+            return this.getName().compareToIgnoreCase(other.getName());
         } else {
             return 1;
         }

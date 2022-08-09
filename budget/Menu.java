@@ -33,7 +33,9 @@ public class Menu {
                     "3) Sort certain type\n" +
                     "4) Back";
 
-
+    static final String analyzerSortByTypeMenu =
+            "\nChoose the type of purchase\n" +
+                    buildCategorySelection();                       // buttons for all categories
 
     private static String buildCategorySelection() {
         StringBuilder strB = new StringBuilder();

@@ -30,4 +30,13 @@ public class UserInput {
         scan.nextLine();
         return button;
     }
+
+    int scanButton(boolean store) {
+        int button = scan.nextInt();
+        scan.nextLine();
+        if (store) {
+            this.button = button;
+        }
+        return button;
+    }
 }
