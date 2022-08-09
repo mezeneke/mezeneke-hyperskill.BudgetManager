@@ -4,16 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Category {
-
     static final Map<Integer, Categories> categories = buildCategoryMap();
     static final int numberOfCategories = Categories.values().length;
 
     static Map<Integer, Categories> buildCategoryMap() {
         Map<Integer, Categories> map = new HashMap<>();
         Categories[] values = Categories.values();
-
-        for (int i = 1; i <= values.length; i++) {
-            map.put(i, values[i]);
+        for (int i = 0; i < values.length; i++) {
+            map.put(i + 1, values[i]);
         }
         return map;
     }
@@ -24,10 +22,10 @@ public class Category {
         ENTERTAINMENT("Entertainment"),
         OTHER("Other");
 
-        final String categoryName;
+        final String name;
 
         Categories(String category) {
-            this.categoryName = category;
+            this.name = category;
         }
     }
 }

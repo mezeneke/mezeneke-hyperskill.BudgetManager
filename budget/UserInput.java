@@ -3,8 +3,10 @@ package budget;
 import java.util.Scanner;
 
 public class UserInput {
-    final Scanner scan;
+    private final Scanner scan;
     private String value;
+
+    private int button;
 
     UserInput() {
         this.scan = new Scanner(System.in);
@@ -14,8 +16,18 @@ public class UserInput {
         return value;
     }
 
+    public int getButton() {
+        return button;
+    }
+
     String scan() {
         this.value = scan.nextLine();
         return value;
+    }
+
+    int scanButton() {
+        this.button = scan.nextInt();
+        scan.nextLine();
+        return button;
     }
 }
